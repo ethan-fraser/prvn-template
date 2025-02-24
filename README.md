@@ -1,6 +1,6 @@
 # PRVN Template
 
-A template for a PRVN stack project (Pocketbase, React, Vite,Node).
+A template for a PRVN stack project (Pocketbase, React, Vite, Node).
 
 ## Setup
 1. Clone the repository
