@@ -1,25 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import PocketbaseService from "./lib/pocketbase";
+import styled from "styled-components";
 
-function App() {
-  const [count, setCount] = useState(0);
+export default function App() {
+  const [pbHealth, setPbHealth] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setPbHealth(await PocketbaseService.checkHealth());
+    })();
+  }, []);
 
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+    <AppContainer>
+      <h1>Pocketbase + React + Vite + Node.js</h1>
+      <div>
+        <p>Pocketbase is {pbHealth ? "healthy" : "unhealthy"}</p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </AppContainer>
   );
 }
 
-export default App;
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
